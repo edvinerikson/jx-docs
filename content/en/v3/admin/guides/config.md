@@ -96,12 +96,12 @@ environments:
 - key: production
 kaniko: true
 storage:
-  logs:
-    enabled: false
-  reports:
-    enabled: false
-  repository:
-    enabled: false
+  - name: logs
+    url: gs://my-bucket
+  - name: reports
+    url: s3://my-bucket
+  - name: repository
+    url: https://github.com/jenkins-x/jx-docs.git
 webhook: lighthouse
 ```
 
@@ -123,14 +123,11 @@ environments:
 kaniko: true
 secretStorage: local
 storage:
-  logs:
-    enabled: true
+  - name: logs
     url: "gs://jx-logs"
-  reports:
-    enabled: true
+  - name: reports
     url: "gs://jx-logs"
-  repository:
-    enabled: true
+  - name: repository
     url: "gs://jx-logs"
 webhook: lighthouse
 ```
@@ -153,14 +150,11 @@ environments:
 kaniko: true
 secretStorage: local
 storage:
-  logs:
-    enabled: true
+  - name: logs
     url: "gs://jx-logs"
-  reports:
-    enabled: true
+  - name: reports
     url: "gs://jx-logs"
-  repository:
-    enabled: true
+  - name: repository
     url: "gs://jx-logs"
 webhook: lighthouse
 ```
@@ -182,14 +176,11 @@ environments:
 kaniko: true
 secretStorage: local
 storage:
-  logs:
-    enabled: true
+  - name: logs
     url: "gs://jx-logs"
-  reports:
-    enabled: true
+  - name: reports
     url: "gs://jx-logs"
-  repository:
-    enabled: true
+  - name: repository
     url: "gs://jx-logs"
 webhook: lighthouse
 ```
@@ -212,14 +203,11 @@ environments:
 kaniko: true
 secretStorage: local
 storage:
-  logs:
-    enabled: true
+  - name: logs
     url: "gs://jx-logs"
-  reports:
-    enabled: true
+  - name: reports
     url: "gs://jx-logs"
-  repository:
-    enabled: true
+  - name: repository
     url: "gs://jx-logs"
 webhook: lighthouse
 ```
@@ -288,12 +276,8 @@ environments:
 - key: production
 kaniko: true
 storage:
-  logs:
-    enabled: true
-  reports:
-    enabled: false
-  repository:
-    enabled: false
+  - name: logs
+    url: "gs://jx-logs"
 ```
 
 You can also specify the URLs of the storage buckets in the `storage` section. The following URL syntax is supported
@@ -315,15 +299,12 @@ environments:
 - key: production
 kaniko: true
 storage:
-  logs:
-    enabled: false
-    url: gs://my-logs
-  reports:
-    enabled: false
-    url: gs://my-logs
-  repository:
-    enabled: false
-    url: gs://my-repo
+  - name: logs
+    url: "gs://jx-logs"
+  - name: reports
+    url: "gs://jx-logs"
+  - name: repository
+    url: "gs://jx-logs"
 ```
 
 {{< pageinfo >}}
@@ -361,12 +342,12 @@ ingress:
 kaniko: true
 secretStorage: local
 storage:
-  logs:
-    enabled: false
-  reports:
-    enabled: false
-  repository:
-    enabled: false
+  - name: logs
+    url: "gs://jx-logs"
+  - name: reports
+    url: "gs://jx-logs"
+  - name: repository
+    url: "gs://jx-logs"
 webhook: prow
 ```
 
@@ -449,15 +430,12 @@ ingress:
 kaniko: true
 secretStorage: vault
 storage:
-  logs:
-    enabled: true
-    url: gs://jx-prod-logs
-  reports:
-    enabled: false
-    url: ""
-  repository:
-    enabled: false
-    url: ""
+  - name: logs
+    url: "gs://jx-logs"
+  - name: reports
+    url: "gs://jx-logs"
+  - name: repository
+    url: "gs://jx-logs"
 webhook: prow
 ```
 
@@ -473,8 +451,7 @@ To enable Velero add the following to your `jx-requirements.yml`:
 
 ```yaml
 storage:
-  backup:
-    enabled: true
+  - name: backup
     url: gs://my-backup-bucket
 velero:
   namespace: velero
